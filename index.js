@@ -137,6 +137,7 @@ const run = async () => {
       const id = req.params.id;
 
       const result = await jobCollection.findOne({ _id: ObjectId(id) });
+      console.log(result)
       res.send({ status: true, data: result });
     });
 
