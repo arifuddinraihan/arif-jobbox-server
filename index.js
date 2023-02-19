@@ -79,7 +79,7 @@ const run = async () => {
           },
         },
       };
-      console.log(updateDoc)
+      // console.log(updateDoc)
       const result = await jobCollection.updateOne(filter, updateDoc);
 
       if (result?.acknowledged) {
