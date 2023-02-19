@@ -79,7 +79,7 @@ const run = async () => {
           },
         },
       };
-
+      console.log(updateDoc)
       const result = await jobCollection.updateOne(filter, updateDoc);
 
       if (result?.acknowledged) {
@@ -123,7 +123,7 @@ const run = async () => {
       const query = { applicants: { $elemMatch: { email: email } } };
       const cursor = jobCollection.find(query).project({ applicants: 0 });
       const result = await cursor.toArray();
-
+      // console.log(result)
       res.send({ status: true, data: result });
     });
 
@@ -137,7 +137,7 @@ const run = async () => {
       const id = req.params.id;
 
       const result = await jobCollection.findOne({ _id: ObjectId(id) });
-      console.log(result)
+
       res.send({ status: true, data: result });
     });
 
