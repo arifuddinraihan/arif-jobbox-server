@@ -126,6 +126,15 @@ const run = async () => {
       // console.log(result)
       res.send({ status: true, data: result });
     });
+    app.get("/posted-jobs/:companyName", async (req, res) => {
+      const companyName = req.params.companyName;
+      const query = { companyName: companyName };
+      const cursor = jobCollection.find(query);
+      const result = await cursor.toArray();
+      console.log(result)
+
+      res.send({ status: true, data: result });
+    });
 
     app.get("/jobs", async (req, res) => {
       const cursor = jobCollection.find({});
