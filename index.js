@@ -132,6 +132,10 @@ const run = async () => {
       const cursor = jobCollection.find(query);
       const result = await cursor.toArray();
       // console.log(result)
+      // console.log(result)
+      // console.log(result)
+      // console.log(result)
+      // console.log(result)
 
       res.send({ status: true, data: result });
     });
