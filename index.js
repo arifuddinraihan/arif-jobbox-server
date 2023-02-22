@@ -131,7 +131,7 @@ const run = async () => {
       const query = { companyName: companyName };
       const cursor = jobCollection.find(query);
       const result = await cursor.toArray();
-      console.log(result)
+      // console.log(result)
 
       res.send({ status: true, data: result });
     });
@@ -148,6 +148,23 @@ const run = async () => {
       const result = await jobCollection.findOne({ _id: ObjectId(id) });
 
       res.send({ status: true, data: result });
+    });
+    app.get("/job-applicants/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id), applicants };
+      const jobs = await jobCollection.find(query).toArray();
+      const applicantsList = jobs?.applicants;
+      console.log(applicantsList)
+
+      const role = "candidate";
+      const userQuery = { role: role };
+      const result = await userCollection.find(userQuery).toArray();
+      console.log(result)
+
+      // const finalCandidates = result.map((candidate) => applicants.filter((user) => user.email === candidate.email))
+
+      // console.log(finalCandidates)
+      // res.send({ status: true, data: result });
     });
 
     app.post("/job", async (req, res) => {
