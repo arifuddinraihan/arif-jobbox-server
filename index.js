@@ -163,7 +163,7 @@ const run = async () => {
       const result = await userCollection.find(userQuery).toArray();
       // console.log(result)
 
-      const [finalCandidates] = applicant.map((candidate) => result.filter((user) => user.email === candidate.email))
+      const finalCandidates = applicant.map((candidate) => result.find((user) => user.email === candidate.email))
 
       // console.log(finalCandidates)
       res.send({ status: true, data: finalCandidates });
