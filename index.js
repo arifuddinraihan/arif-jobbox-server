@@ -132,10 +132,6 @@ const run = async () => {
       const cursor = jobCollection.find(query);
       const result = await cursor.toArray();
       // console.log(result)
-      // console.log(result)
-      // console.log(result)
-      // console.log(result)
-      // console.log(result)
 
       res.send({ status: true, data: result });
     });
@@ -153,22 +149,24 @@ const run = async () => {
 
       res.send({ status: true, data: result });
     });
+
     app.get("/job-applicants/:id", async (req, res) => {
       const id = req.params.id;
-      const query = { _id: ObjectId(id), applicants };
+      const query = { _id: ObjectId(id) };
       const jobs = await jobCollection.find(query).toArray();
-      const applicantsList = jobs?.applicants;
-      console.log(applicantsList)
+      // const applicantsList = jobs?.applicants;
+      const [applicant] = jobs.map((user) => user.applicants)
+      // console.log(applicant, "Applicants List")
 
       const role = "candidate";
       const userQuery = { role: role };
       const result = await userCollection.find(userQuery).toArray();
-      console.log(result)
+      // console.log(result)
 
-      // const finalCandidates = result.map((candidate) => applicants.filter((user) => user.email === candidate.email))
+      const [finalCandidates] = applicant.map((candidate) => result.filter((user) => user.email === candidate.email))
 
       // console.log(finalCandidates)
-      // res.send({ status: true, data: result });
+      res.send({ status: true, data: finalCandidates });
     });
 
     app.post("/job", async (req, res) => {
