@@ -170,10 +170,10 @@ const run = async () => {
     });
 
     app.get("/chat/:id", async (req, res) => {
-      const id = req.params.id
+      // const id = req.params.id
       // const userQuery = { _id: ObjectId(id) };
-      const result = await userCollection.findOne({ _id: ObjectId(id) });
-      console.log(result)
+      const result = await userCollection.findOne({ _id: ObjectId(req.params.id) });
+      // console.log(result)
       res.send({ status: true, data: result });
     });
 
