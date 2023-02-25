@@ -171,10 +171,9 @@ const run = async () => {
 
     app.get("/chat/:id", async (req, res) => {
       const id = req.params.id
-      const role = "candidate";
-      const userQuery = { _id: ObjectId(id), role: role };
-      const result = await userCollection.find(userQuery).toArray();
-      // console.log(result)
+      // const userQuery = { _id: ObjectId(id) };
+      const result = await userCollection.findOne({ _id: ObjectId(id) });
+      console.log(result)
       res.send({ status: true, data: result });
     });
 
