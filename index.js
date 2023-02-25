@@ -169,6 +169,15 @@ const run = async () => {
       res.send({ status: true, data: finalCandidates });
     });
 
+    app.get("/chat/:id", async (req, res) => {
+      const id = req.params.id
+      const role = "candidate";
+      const userQuery = { _id: ObjectId(id), role: role };
+      const result = await userCollection.find(userQuery).toArray();
+      // console.log(result)
+      res.send({ status: true, data: result });
+    });
+
     app.post("/job", async (req, res) => {
       const job = req.body;
 
