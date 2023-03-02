@@ -165,16 +165,7 @@ const run = async () => {
 
       const finalCandidates = applicant.map((candidate) => result.find((user) => user.email === candidate.email))
 
-      // console.log(finalCandidates)
       res.send({ status: true, data: finalCandidates });
-    });
-
-    app.get("/chat/:id", async (req, res) => {
-      // const id = req.params.id
-      // const userQuery = { _id: ObjectId(id) };
-      const result = await userCollection.findOne({ _id: ObjectId(req.params.id) });
-      // console.log(result)
-      res.send({ status: true, data: result });
     });
 
     app.post("/job", async (req, res) => {
